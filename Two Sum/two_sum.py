@@ -5,7 +5,9 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
+        num_dict = {}
         for index, num in enumerate(nums):
-            if target - num in nums[index + 1:]:
-                return [index, nums.index(target - num, index + 1)]
-        
+            other = target - num
+            if other in num_dict:
+                return [num_dict[other], index]
+            num_dict[num] = index
