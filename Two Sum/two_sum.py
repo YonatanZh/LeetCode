@@ -7,7 +7,7 @@ class Solution(object):
         """
         num_dict = {}
         for index, num in enumerate(nums):
-            other = target - num
-            if other in num_dict:
-                return [num_dict[other], index]
+            complement = target - num
+            if complement in num_dict:
+                return [num_dict[complement], index]
             num_dict[num] = index
