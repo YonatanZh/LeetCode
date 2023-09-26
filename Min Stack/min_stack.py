@@ -1,9 +1,7 @@
-import heapq
-
 class MinStack(object):
     def __init__(self):
-        self._heap = []
         self._q = []
+        self._min = None
 
     def push(self, val):
         """
@@ -11,19 +9,21 @@ class MinStack(object):
         :rtype: None
         """
         self._q.append(val)
-        heapq.heappush(self._heap, val)
+        if self._min is None:
+            self._min = val
+        elif self._min > val:
+            self._min = val
 
     def pop(self):
         """
         :rtype: None
         """
-        if self._heap[0] == self.top():
-            heapq.heappop(self._heap)
-            self._q.pop()
-        else:
-            removed = self._q.pop()
-            self._heap.remove(removed)
-            heapq.heapify(self._heap)
+        removed = self.top()
+        self._q.pop()
+        if self._q == []:
+            self._min = None
+        elif self._min == removed:
+            self._min = min(self._q)
 
     def top(self):
         """
@@ -35,4 +35,4 @@ class MinStack(object):
         """
         :rtype: int
         """
-        return self._heap[0]
+        return self._min
