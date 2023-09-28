@@ -5,9 +5,9 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        num_dict = {}
+        hash = {}
         for index, num in enumerate(nums):
             complement = target - num
             if complement in num_dict:
-                return [num_dict[complement], index]
-            num_dict[num] = index
+                return [hash[complement], index]
+            hash[num] = index
